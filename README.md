@@ -10,6 +10,11 @@
     * ```backend-dev```
     * ```backend-prod```
 
+## mobile:
+- branches
+    * ```mobile-dev```
+    * ```mobile-prod```
+
 ## Members:
 - ```Abdulaminxon Haydarov (PM, Git Master, Software Engineer)```
 - ```Azamat Ergashev (Software Engineer)```
