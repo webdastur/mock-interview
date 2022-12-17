@@ -30,7 +30,4 @@ public class AuditableEntity : BaseEntity
             return (updateUserId == 0 && this.CreatedUserId != 0) ? this.CreatedUserId : updateUserId;
         }
     }
-
-    public User CreatedUser { get; set; }
-    public User UpdatedUser { get; set; }
 }
