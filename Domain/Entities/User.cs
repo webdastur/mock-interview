@@ -1,5 +1,6 @@
 ﻿using Domain.Enums;
 using Domain.Entities.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
@@ -14,8 +15,12 @@ public class User : AuditableEntity
     public byte[] PasswordHash { get; set; }
     public Role Role { get; set; }
 
-    public List<Project> Projects { get; set; }
-    public List<Experience> Experiences { get; set; }
-    public List<Interview> Interviews { get; set; }
-    public List<Transaction> Transactions { get; set; }
+    [NotMapped]
+    public string FullName =>
+        $"{LastName} {FirstName} {MiddleName}";
+
+    public ICollection<Project> Projects { get; set; }
+    public ICollection<Experience> Experiences { get; set; }
+    public ICollection<Interview> Interviews { get; set; }
+    public ICollection<Transaction> Transactions { get; set; }
 }
