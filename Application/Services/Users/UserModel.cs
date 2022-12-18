@@ -16,4 +16,5 @@ public class UserModel : BaseModel
     public string Phone { get; set; }
     public string Login { get; set; }
     public string Role { get; set; }
+    public int? ImageId { get; set; }
 }
