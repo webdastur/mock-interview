@@ -16,6 +16,18 @@ namespace WebHost.Controllers
         /// <summary>
         /// Post New Experience
         /// </summary>
+        /// <remarks>
+        /// Response Example:
+        /// 
+        ///     Post /Experiences
+        ///     {
+        ///       "name": "string",
+        ///       "description": "string",
+        ///       "level_id": 0,
+        ///       "from": "2022-12-18T12:12:55.635Z",
+        ///       "to": "2022-12-18T12:12:55.635Z"
+        ///     }
+        /// </remarks>
         /// <param name="experienceCreateModel"></param>
         /// <returns></returns>
         [HttpPost]

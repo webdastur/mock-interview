@@ -13,6 +13,11 @@ namespace WebHost.Controllers
             this.fileService = fileService;
         }
 
+        /// <summary>
+        /// Post File
+        /// </summary>
+        /// <param name="createFileModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PostFile([FromForm]FileCreateModel createFileModel)
         {

@@ -146,4 +146,16 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
 
         return query;
     }
+
+    public Task<T> GetByIdIncAsync(int id, string[] includeTables)
+    {
+        IQueryable<T> query = context.Set<T>();
+
+        foreach (var table in includeTables)
+        {
+            query = query.Include(table);
+        }
+
+        return query.FirstOrDefaultAsync();
+    }
 }
