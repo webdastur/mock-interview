@@ -24,7 +24,7 @@ class AppWidgets {
       return Padding(
         padding: padding,
         child: SuperRichText(
-          text:  text,
+          text: text,
           style: GoogleFonts.lato(
             color: color,
             fontSize: fontSize,
@@ -40,7 +40,8 @@ class AppWidgets {
     }
     return Padding(
       padding: padding,
-      child: Text(text,
+      child: Text(
+        text,
         style: GoogleFonts.lato(
           color: color,
           fontSize: fontSize,

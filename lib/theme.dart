@@ -71,7 +71,7 @@ class AppTheme extends ChangeNotifier {
 
 AccentColor get systemAccentColor {
   if ((defaultTargetPlatform == TargetPlatform.windows ||
-      defaultTargetPlatform == TargetPlatform.android) &&
+          defaultTargetPlatform == TargetPlatform.android) &&
       !kIsWeb) {
     return AccentColor.swatch({
       'darkest': SystemTheme.accentColor.darkest,

@@ -1,5 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:mock_interview/core/extensions/app_extensions.dart';
+import 'package:mock_interview/core/models/api/interviewer/response/interviewer_response.dart';
+import 'package:mock_interview/core/services/api_service.dart';
 import 'package:mock_interview/core/utils/assets.gen.dart';
 
 class HomePageModule extends Module {
@@ -12,148 +17,123 @@ class HomePageModule extends Module {
       ];
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const String routeName = "/";
 
   HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  static const _pageSize = 9;
+
+  final PagingController<int, InterviewerResponse> _pagingController =
+      PagingController(firstPageKey: 0);
+
+  @override
+  void initState() {
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+    super.initState();
+  }
+
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      final data = await APIService.to
+          .getAllInterviewers(page: pageKey, pageSize: _pageSize);
+
+      if (data['message'] != null) {
+        _pagingController.error = data['message'];
+        return;
+      }
+
+      var items = (data['data']['items'] as List)
+          .map((item) => InterviewerResponse.fromJson(item))
+          .toList();
+
+      final isLastPage = !data['data']['has_next_page'];
+      if (isLastPage) {
+        _pagingController.appendLastPage(items);
+      } else {
+        int nextPageKey = pageKey + items.length;
+        _pagingController.appendPage(items, nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ScaffoldPage.scrollable(
-      header: PageHeader(
-        title: Text("Mock Interview"),
-        commandBar: CommandBarCard(
-          child: Row(children: [
-            Expanded(
-              child: CommandBar(
-                overflowBehavior: CommandBarOverflowBehavior.scrolling,
-                primaryItems: [
-                  ...simpleCommandBarItems,
-                  const CommandBarSeparator(),
-                  ...moreCommandBarItems,
-                ],
-              ),
-            ),
-            // End-aligned button(s)
-            CommandBar(
+    var typography = FluentTheme.of(context).typography;
+    return SafeArea(
+      child: ScaffoldPage.scrollable(
+        header: PageHeader(
+          title: const Text("Mock Interview"),
+          commandBar: CommandBarCard(
+            child: CommandBar(
               overflowBehavior: CommandBarOverflowBehavior.noWrap,
+              mainAxisAlignment: MainAxisAlignment.center,
               primaryItems: [
                 CommandBarButton(
-                  icon: const Icon(FluentIcons.refresh),
+                  icon: const Icon(FluentIcons.people_add),
+                  label: const Text("Register"),
+                  onPressed: () {},
+                ),
+                const CommandBarSeparator(),
+                CommandBarButton(
+                  icon: const Icon(FluentIcons.follow_user),
+                  label: const Text("Login"),
                   onPressed: () {},
                 ),
               ],
             ),
-          ]),
+          ),
         ),
+        children: [
+          Assets.images.interview.image(),
+          Center(
+            child: Text(
+              "Test your skills with our talents",
+              style: typography.title,
+            ).paddingOnly(top: 15),
+          ),
+          Text(
+            "We have highly skilled talents over the world. You can test your skills with our talents. We provide detailed roadmap for you.",
+            style: typography.subtitle,
+            textAlign: TextAlign.center,
+          ).paddingOnly(top: 15),
+          PagedListView(
+            pagingController: _pagingController,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            builderDelegate: PagedChildBuilderDelegate<InterviewerResponse>(
+              itemBuilder: (context, item, index) => Container(
+                width: 300,
+                height: 700,
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: 'https://picsum.photos/id/237/200/300',
+                      ),
+                    ),
+                    Text(
+                      item.fullName ?? "-",
+                      style: typography.title,
+                    ).paddingOnly(top: 15),
+                  ],
+                ),
+              ),
+            ),
+          ).paddingSymmetric(vertical: 10),
+        ],
       ),
-      children: [Assets.images.interview.image()],
     );
   }
-
-  final simpleCommandBarItems = <CommandBarItem>[
-    CommandBarBuilderItem(
-      builder: (context, mode, w) => Tooltip(
-        message: "Create something new!",
-        child: w,
-      ),
-      wrappedItem: CommandBarButton(
-        icon: const Icon(FluentIcons.add),
-        label: const Text('New'),
-        onPressed: () {},
-      ),
-    ),
-    CommandBarBuilderItem(
-      builder: (context, mode, w) => Tooltip(
-        message: "Delete what is currently selected!",
-        child: w,
-      ),
-      wrappedItem: CommandBarButton(
-        icon: const Icon(FluentIcons.delete),
-        label: const Text('Delete'),
-        onPressed: () {},
-      ),
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.archive),
-      label: const Text('Archive'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.move),
-      label: const Text('Move'),
-      onPressed: () {},
-    ),
-    const CommandBarButton(
-      icon: Icon(FluentIcons.cancel),
-      label: Text('Disabled'),
-      onPressed: null,
-    ),
-  ];
-
-  final moreCommandBarItems = <CommandBarItem>[
-    CommandBarButton(
-      icon: const Icon(FluentIcons.reply),
-      label: const Text('Reply'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.reply_all),
-      label: const Text('Reply All'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.forward),
-      label: const Text('Forward'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.search),
-      label: const Text('Search'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.pin),
-      label: const Text('Pin'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.unpin),
-      label: const Text('Unpin'),
-      onPressed: () {},
-    ),
-  ];
-
-  final evenMoreCommandBarItems = <CommandBarItem>[
-    CommandBarButton(
-      icon: const Icon(FluentIcons.accept),
-      label: const Text('Accept'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.calculator_multiply),
-      label: const Text('Reject'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.share),
-      label: const Text('Share'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.add_favorite),
-      label: const Text('Add Favorite'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.back),
-      label: const Text('Backward'),
-      onPressed: () {},
-    ),
-    CommandBarButton(
-      icon: const Icon(FluentIcons.forward),
-      label: const Text('Forward'),
-      onPressed: () {},
-    ),
-  ];
 }
