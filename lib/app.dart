@@ -74,10 +74,8 @@ class App extends StatelessWidget {
     );
     return NavigationPaneTheme(
       data: NavigationPaneThemeData(
-        backgroundColor: p.Provider
-            .of<AppTheme>(context)
-            .windowEffect !=
-            flutter_acrylic.WindowEffect.disabled
+        backgroundColor: p.Provider.of<AppTheme>(context).windowEffect !=
+                flutter_acrylic.WindowEffect.disabled
             ? Colors.transparent
             : null,
       ),
@@ -99,8 +97,7 @@ void rebuildAllChildren(BuildContext context) {
 
 class AppModule extends Module {
   @override
-  List<Bind<Object>> get binds =>
-      [
+  List<Bind<Object>> get binds => [
         // Bind.singleton<HttpService>((i) => HttpService.init()),
         AsyncBind<HiveService>((i) => HiveService.init()),
         Bind.lazySingleton((i) => APIService.init()),
@@ -114,14 +111,13 @@ class AppModule extends Module {
         // Bind.lazySingleton<TariffService>((i) => TariffService()),
         // Bind.lazySingleton<NewsService>((i) => NewsService()),
         Bind<LoaderCubit>(
-              (i) => LoaderCubit(),
+          (i) => LoaderCubit(),
           onDispose: (v) => v.close(),
         ),
       ];
 
   @override
-  List<ModularRoute> get routes =>
-      [
+  List<ModularRoute> get routes => [
         ModuleRoute('/', module: NotFoundPageModule()),
         ModuleRoute('/', module: HomePageModule()),
         // ModuleRoute('/', module: ChangeLanguageModule()),

@@ -49,4 +49,3 @@ extension WidgetMarginX on Widget {
 
   Widget get marginZero => Container(margin: EdgeInsets.zero, child: this);
 }
-
