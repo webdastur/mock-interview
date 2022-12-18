@@ -66,9 +66,9 @@ namespace WebHost.Controllers
 
         [HttpGet("list")]
 
-        public async ValueTask<IActionResult> GetProjectsList(int page, int pageSize)
+        public async ValueTask<IActionResult> GetProjectsList([FromQuery] PaginatedRequestModel paginatedRequestModel)
         {
-            PaginatedList<ProjectModel> paginatedProjects = await projectService.GetPaginatedList(new PaginatedRequestModel { Page = page, PageSize = pageSize });
+            PaginatedList<ProjectModel> paginatedProjects = await projectService.GetPaginatedList(paginatedRequestModel);
             return Ok(paginatedProjects);
         }
     }

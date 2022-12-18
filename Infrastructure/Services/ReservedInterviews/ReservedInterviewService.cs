@@ -40,12 +40,12 @@ namespace Infrastructure.Services.ReservedInterviews
         public async ValueTask<PaginatedList<ReservedInterviewModel>> GetReservedInterviews(PaginatedRequestModel paginatedRequestModel)
         {
             int count = await reservedInterviewRepository.GetCountAsync();
-
+            int userId = currentUser.GetUserId();
             List<ReservedInterview> reservedInterviews = await reservedInterviewRepository.GetAllByIncPage(
                 paginatedRequestModel.Page,
-                    paginatedRequestModel.PageSize,
+                    paginatedRequestModel.PageSize,                       
                        query => query.OrderByDescending(order => order.UpdatedAt),
-                            new string[] { "Payments" })
+                            new string[] { "Payments" }).Where(func => func.UserId == userId)
                                .ToListAsync();
 
             var reservedInterviewsModels = mapper.Map<List<ReservedInterviewModel>>(reservedInterviews);
