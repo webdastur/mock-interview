@@ -17,7 +17,9 @@ public class IMappers : Profile
 {
     public IMappers()
     {
-        CreateMap<User, UserModel>().ReverseMap();
+        CreateMap<User, UserModel>().ForMember(member => member.Image, source => source.MapFrom(map => map.Image))
+                                    .ForMember(member => member.Experiences, source => source.MapFrom(map => map.Experiences))
+                                    .ForMember(member => member.Projects, source => source.MapFrom(map => map.Projects)).ReverseMap();
         CreateMap<User, CreateUserModel>().ReverseMap();
         CreateMap<User, UpdateUserModel>().ReverseMap();
         CreateMap<File, FileModel>().ReverseMap();

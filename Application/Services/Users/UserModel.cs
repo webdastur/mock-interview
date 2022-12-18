@@ -1,5 +1,6 @@
 ﻿using Application.Common.Model;
 using Application.Services.Experiences;
+using Application.Services.Files;
 using Application.Services.Projects;
 using System.Text.Json.Serialization;
 
@@ -18,7 +19,7 @@ public class UserModel : BaseModel
     public string Phone { get; set; }
     public string Login { get; set; }
     public string Role { get; set; }
-    public int? ImageId { get; set; }
+    public FileModel Image { get; set; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public List<ExperienceModel> Experiences { get; set; }

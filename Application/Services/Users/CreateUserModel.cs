@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Application.Services.Files;
+using System.Text.Json.Serialization;
 
 namespace Application.Services.Users;
 
@@ -16,5 +17,5 @@ public class CreateUserModel
     public string Login { get; set; }
     public string Password { get; set; }
     public string Role { get; set; }
-    public int? ImageId { get; set; }
+    public FileModel Image { get; set; }
 }
