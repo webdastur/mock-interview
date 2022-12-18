@@ -17,7 +17,7 @@ class _$InterviewerService extends InterviewerService {
   final definitionType = InterviewerService;
 
   @override
-  Future<Response<ResponseModel>> getAllInterviewers(
+  Future<Response<ResponseModel<dynamic>>> getAllInterviewers(
     int page,
     int pageSize,
   ) {
@@ -32,6 +32,7 @@ class _$InterviewerService extends InterviewerService {
       client.baseUrl,
       parameters: $params,
     );
-    return client.send<ResponseModel, ResponseModel>($request);
+    return client
+        .send<ResponseModel<dynamic>, ResponseModel<dynamic>>($request);
   }
 }
