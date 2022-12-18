@@ -87,10 +87,17 @@ namespace WebHost.Controllers
         }
 
         [HttpGet("list")]
-        public async ValueTask<IActionResult> GetLevelsByPagination(int page, int pageSize)
+        public async ValueTask<IActionResult> GetLevelsByPagination([FromQuery] PaginatedRequestModel paginatedRequestModel)
         {
-            PaginatedList<LevelModel> paginatedLevels = await levelService.GetPaginatedList(new PaginatedRequestModel { Page = page, PageSize = pageSize });
-            return Ok(paginatedLevels);
+            try
+            {
+                PaginatedList<LevelModel> paginatedLevels = await levelService.GetPaginatedList(paginatedRequestModel);
+                return Ok(new ResponseModel(paginatedLevels));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
     }
 }

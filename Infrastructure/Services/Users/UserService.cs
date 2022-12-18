@@ -57,11 +57,12 @@ public class UserService : IUserService
     public async Task<PaginatedList<UserModel>> GetAllUsers(PaginatedRequestModel paginatedRequestModel)
     {
         int allUsersCount = await userRepository.GetCountAsync();
-        List<User> users = await userRepository.GetAllByOrderPage(
+        List<User> users = await userRepository.GetAllByIncPage(
             paginatedRequestModel.Page,
                 paginatedRequestModel.PageSize,
-                    query => query.OrderBy(order => order.Id)
-                        ).ToListAsync();
+                    query => query.OrderBy(order => order.Id),
+                        new string[] { "Experiences", "Projects"}
+                            ).ToListAsync();
 
         return new PaginatedList<UserModel>
             (
@@ -99,7 +100,7 @@ public class UserService : IUserService
                 paginatedRequestModel.PageSize,
                     query => query.Role == Role.Interviewer,
                         query => query.OrderBy(order => order.Id),
-                            new string[] { "Projects" }
+                            new string[] { "Projects", "Experiences" }
                                 ).ToListAsync();
 
         return new PaginatedList<InterviewerModel>
