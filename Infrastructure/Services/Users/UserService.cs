@@ -22,6 +22,9 @@ public class UserService : IUserService
 
     public UserModel CreateUser(CreateUserModel createUserModel)
     {
+        if (createUserModel.Role.Equals(Role.Interviewer) && createUserModel.ImageId is null)
+            throw new Exception("Image is required for interviewer");
+
         byte[] salt;
         byte[] hash;
         PasswordHasher.CreatePasswordHash(createUserModel.Password, out salt, out hash);

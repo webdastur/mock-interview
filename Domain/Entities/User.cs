@@ -14,6 +14,8 @@ public class User : AuditableEntity
     public byte[] PasswordSalt { get; set; }
     public byte[] PasswordHash { get; set; }
     public Role Role { get; set; }
+    public int? ImageId { get; set; }
+    public File Image { get; set; } 
 
     [NotMapped]
     public string FullName =>
