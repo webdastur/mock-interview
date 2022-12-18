@@ -1,0 +1,101 @@
+name: mock_interview
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_web_plugins:
+    sdk: flutter
+  cupertino_icons: ^1.0.5
+
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
+  google_fonts: ^3.0.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  logger: ^1.1.0
+  isar: ^3.0.5
+  isar_flutter_libs: ^3.0.5
+  flutter_gen: ^5.1.0+1
+  super_rich_text: ^1.0.0
+  bot_toast: ^4.0.3
+  flutter_modular: ^5.0.3
+  bloc_concurrency: ^0.2.0
+  flutter_easyloading: ^3.0.5
+  flutter_svg: ^1.1.6
+  sealed_flutter_bloc: ^8.0.0
+  chopper: ^6.0.0
+  json_annotation: ^4.7.0
+  responsive_framework: ^0.2.0
+  mask_text_input_formatter: ^2.4.0
+  font_awesome_flutter: ^10.3.0
+  flutter_hooks: ^0.18.5+1
+  responsive_builder: ^0.4.3
+  fluent_ui: ^4.1.2
+  flutter_acrylic: ^1.0.0+2
+  system_theme: ^2.0.0
+  window_manager: ^0.2.8
+  provider: ^6.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+  isar_generator: ^3.0.5
+  build_runner: ^2.3.3
+  chopper_generator: ^6.0.0
+  json_serializable: ^6.5.4
+  icons_launcher: ^2.0.6
+
+flutter_gen:
+  output: lib/core/utils/ # Optional (default: lib/gen/)
+  line_length: 80 # Optional (default: 80)
+
+  # Optional
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+    rive: true
+
+  assets:
+    enabled: true
+
+flutter:
+  generate: true
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icon/
