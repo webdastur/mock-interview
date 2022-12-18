@@ -43,6 +43,11 @@ namespace WebHost.Controllers
             }
         }
 
+        /// <summary>
+        /// Get level by id
+        /// </summary>
+        /// <param name="levelId"></param>
+        /// <returns></returns>
         [HttpGet]
         public async ValueTask<IActionResult> GetLevelById(int levelId)
         {
@@ -57,6 +62,11 @@ namespace WebHost.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete level
+        /// </summary>
+        /// <param name="levelId"></param>
+        /// <returns></returns>
         [HttpDelete]
         public async ValueTask<IActionResult> DeleteLevel(int levelId)
         {
@@ -71,6 +81,11 @@ namespace WebHost.Controllers
             }
         }
 
+        /// <summary>
+        /// Update level
+        /// </summary>
+        /// <param name="updateLevelModel"></param>
+        /// <returns></returns>
         [HttpPut]
         public async ValueTask<IActionResult> UpdateLevel(UpdateLevelModel updateLevelModel)
         {
@@ -86,6 +101,11 @@ namespace WebHost.Controllers
             }
         }
 
+        /// <summary>
+        /// Get level by pagination
+        /// </summary>
+        /// <param name="paginatedRequestModel"></param>
+        /// <returns></returns>
         [HttpGet("list")]
         public async ValueTask<IActionResult> GetLevelsByPagination([FromQuery] PaginatedRequestModel paginatedRequestModel)
         {
