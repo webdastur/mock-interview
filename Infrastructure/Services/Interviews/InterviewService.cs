@@ -58,7 +58,7 @@ public class InterviewService : IInterviewService
 
     public async Task<PaginatedList<InterviewModel>> GetByFilteredInterviews(FilteredRequestModel paginatedRequestModel)
     {
-        if (paginatedRequestModel.Search.Any())
+        if (paginatedRequestModel.Search is not null)
         {
             return await GetBySearch(paginatedRequestModel);
         }

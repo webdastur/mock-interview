@@ -8,5 +8,5 @@ public class InterviewCreateModel
     public string Description { get; set; }
 
     [JsonPropertyName("category_id")]
-    public int CategoryId { get; set; }
+    public required int CategoryId { get; set; }
 }

@@ -10,4 +10,5 @@ public interface IUserService
     UserModel CreateUser(CreateUserModel createUserModel);
     Task<UserModel> UpdateUser(UpdateUserModel updateUserModel);
     Task DeleteUser(int userId);
+    Task<UserModel> GetUserInfo();
 }
