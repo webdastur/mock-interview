@@ -7,6 +7,8 @@ using Application.Services.Users;
 using AutoMapper;
 using Domain.Entities;
 using File = Domain.Entities.File;
+using Application.Services.ReservedInterviews;
+using Application.Services.Payments;
 
 namespace Application.Common.Mappers;
 
@@ -29,5 +31,9 @@ public class IMappers : Profile
         CreateMap<Interview, InterviewCreateModel>().ReverseMap();
         CreateMap<InterviewCategory, InterviewCategoryModel>().ReverseMap();
         CreateMap<InterviewCategory, InterviewCategoryCreateModel>().ReverseMap();
+        CreateMap<ReservedInterview, ReservedInterviewCreateModel>().ReverseMap();
+        CreateMap<ReservedInterview, ReservedInterviewModel>().ForMember(member => member.Interview, source => source.MapFrom(map => map.Interview)).ReverseMap();
+        CreateMap<Payment, PaymentModel>().ReverseMap();
+        CreateMap<Payment, PaymentCreateModel>().ReverseMap();
     }
 }
