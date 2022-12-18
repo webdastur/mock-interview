@@ -23,5 +23,20 @@
 ### Started date:
 - ```17.12.2022```
 
-### Completion date:
-- ```Not decided```
+## Release(Test):
+
+### Frontend(Web, Mobile(iOS, Android), Desktop(Linux, MacOS, Windows)):
+- ```flutter build linux --release```
+- ```flutter build macos --release```
+- ```flutter build windows --release```
+- ```flutter build ios --release```
+- ```flutter build apk --release```
+- ```flutter build web --release```
+
+### Backend:
+- Database:
+   * User: ```postgres```
+   * Password: ```1```
+   * Port: ```5432```
+   * Host: ```localhost```
+- Run: ```dotnet run```
