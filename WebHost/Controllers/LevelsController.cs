@@ -1,6 +1,7 @@
 ﻿using Application.Common.Model;
 using Application.Services.Levels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Writers;
 
 namespace WebHost.Controllers
 {
@@ -19,7 +20,7 @@ namespace WebHost.Controllers
         /// Create New Level
         /// </summary>
         /// <remarks>
-        /// Response Example:
+        /// Request Example:
         /// 
         ///     Post /levels
         ///     {
@@ -34,32 +35,55 @@ namespace WebHost.Controllers
             try
             {
                 LevelModel levelModel = levelService.CreateLevel(createLevelModel);
-                return Ok(levelModel);
+                return Ok(new ResponseModel(levelModel));
             }
             catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return Ok(new ExceptionModel(ex.Message));
             }
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetLevelById(int levelId)
         {
-            LevelModel levelModel = await levelService.GetById(levelId);
-            return Ok(levelModel);
+            try
+            {
+                LevelModel levelModel = await levelService.GetById(levelId);
+                return Ok(new ResponseModel(levelModel));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
 
         [HttpDelete]
-        public async ValueTask DeleteLevel(int levelId)
+        public async ValueTask<IActionResult> DeleteLevel(int levelId)
         {
-            await levelService.DeleteLevel(levelId);
+            try
+            {
+                await levelService.DeleteLevel(levelId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
 
         [HttpPut]
         public async ValueTask<IActionResult> UpdateLevel(UpdateLevelModel updateLevelModel)
         {
-            LevelModel levelModel = await levelService.UpdateLevel(updateLevelModel);
-            return Ok(levelModel);
+            try
+            {
+                LevelModel levelModel = await levelService.UpdateLevel(updateLevelModel);
+                return Ok(new ResponseModel(levelModel));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+
+            }
         }
 
         [HttpGet("list")]
@@ -68,6 +92,5 @@ namespace WebHost.Controllers
             var paginatedLevels = await levelService.GetPaginatedList(new PaginatedRequestModel { Page = page, PageSize = pageSize });
             return Ok(paginatedLevels);
         }
-
     }
 }
