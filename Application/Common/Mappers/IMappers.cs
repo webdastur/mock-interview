@@ -35,9 +35,7 @@ public class IMappers : Profile
         CreateMap<ReservedInterview, ReservedInterviewCreateModel>().ReverseMap();
         CreateMap<ReservedInterview, ReservedInterviewModel>().ForMember(member => member.Interview, source => source.MapFrom(map => map.Interview)).ReverseMap();
         CreateMap<Payment, PaymentModel>().ReverseMap();
-        CreateMap<Payment, PaymentCreateModel>().ReverseMap();
-    }
-}
+        CreateMap<Payment, PaymentCreateModel>().ReverseMap(); 
 		CreateMap<Interview, InterviewModel>().ReverseMap();
 		CreateMap<Interview, InterviewCreateModel>().ReverseMap();
 		CreateMap<InterviewCategory, InterviewCategoryModel>().ReverseMap();
