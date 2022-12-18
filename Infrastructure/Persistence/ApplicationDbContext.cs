@@ -26,7 +26,6 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Payment> Payments => Set<Payment>();
     public DbSet<Project> Projects => Set<Project>();
     public DbSet<ReservedInterview> ReservedInterviews => Set<ReservedInterview>();
-    public DbSet<Transaction> Transactions => Set<Transaction>();
     public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder builder)
