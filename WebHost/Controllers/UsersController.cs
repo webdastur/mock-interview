@@ -37,8 +37,15 @@ namespace WebHost.Controllers
         [HttpPost]
         public IActionResult PostUser(CreateUserModel createUserModel)
         {
-            UserModel userModel = userService.CreateUser(createUserModel);
-            return Ok(userModel);
+            try
+            {
+                UserModel userModel = userService.CreateUser(createUserModel);
+                return Ok(new ResponseModel(userModel));
+            }
+            catch(Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
 
         /// <summary>
