@@ -28,8 +28,8 @@ namespace WebHost.Controllers
         ///       "name": "string"
         ///       "description": "string"
         ///       "url": "string"
-        ///       "imageId": "int?"
-        ///       "userId": "int"
+        ///       "imageId": "0"
+        ///       "userId": "0"
         ///     }
         /// </remarks>
         /// <param name="projectCreateModel"></param>
@@ -48,7 +48,11 @@ namespace WebHost.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Get Project by id
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
         [HttpGet]
         public async ValueTask<IActionResult> GetProject(int projectId)
         {
@@ -63,7 +67,11 @@ namespace WebHost.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Get Project list with pagination
+        /// </summary>
+        /// <param name="paginatedRequestModel"></param>
+        /// <returns></returns>
         [HttpGet("list")]
 
         public async ValueTask<IActionResult> GetProjectsList([FromQuery] PaginatedRequestModel paginatedRequestModel)

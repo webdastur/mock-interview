@@ -14,7 +14,21 @@ namespace WebHost.Controllers
         {
             this.paymentService = paymentService;
         }
-
+        ///<summary>
+        ///Create New Project
+        /// </summary>
+        /// <remarks>
+        /// Response Example:
+        /// 
+        ///     Post /payments
+        ///     {
+        ///       "interViewId": "int",
+        ///       "userId": "0",
+        ///       "PaymentStatus" : "string"
+        ///     }
+        /// </remarks>
+        /// <param name="paymentCreateModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult PostPayment(PaymentCreateModel paymentCreateModel)
         {

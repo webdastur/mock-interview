@@ -19,7 +19,22 @@ namespace WebHost.Controllers
             this.reservedInterviewService = reservedInterviewService;
         }
 
-
+        /// <summary>
+        /// Reserve an interview
+        /// </summary>
+        /// <remarks>
+        /// /// Request Example:
+        /// 
+        ///     Post /projects
+        ///     {
+        ///       "interviewId": "0"
+        ///       "user_id": "0"
+        ///       "start_time": "datetime"
+        ///       "end_time": "datetime"
+        ///     }
+        /// </remarks>
+        /// <param name="reservedInterviewCreateModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult PostReservedInterview(ReservedInterviewCreateModel reservedInterviewCreateModel)
         {
