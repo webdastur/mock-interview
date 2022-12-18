@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Infrastructure.Auth;
 using Microsoft.Extensions.DependencyInjection;
+using Infrastructure.Services;
 
 namespace Infrastructure;
 
@@ -11,7 +12,8 @@ public static class ConfigureServices
     {
         return services
             .AddAuth()
-            .AddPersistence();
+            .AddPersistence()
+            .AddServices();
     }
 
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
