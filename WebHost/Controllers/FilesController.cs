@@ -1,5 +1,5 @@
-﻿using Application.Services.Files;
-using Microsoft.AspNetCore.Http;
+﻿using Application.Common.Model;
+using Application.Services.Files;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebHost.Controllers
@@ -16,9 +16,16 @@ namespace WebHost.Controllers
         [HttpPost]
         public async Task<IActionResult> PostFile([FromForm]FileCreateModel createFileModel)
         {
-            FileModel file = await fileService.CreateFile(createFileModel);
+            try
+            {
+                FileModel file = await fileService.CreateFile(createFileModel);
 
-            return Ok(file);
+                return Ok(new ResponseModel(file));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
     }
 }
