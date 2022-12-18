@@ -1,4 +1,5 @@
-﻿using Application.Identity;
+﻿using Application.Common.Model;
+using Application.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,16 @@ namespace WebHost.Controllers
         /// </remarks>
         /// <response code="200">Returns token</response>
         [HttpPost]
-        public TokenResponse Get(TokenRequest tokenRequest) => tokenService.GetTokenAsync(tokenRequest);
+        public IActionResult Get(TokenRequest tokenRequest)
+        {
+            try
+            {
+                return Ok(new ResponseModel(tokenService.GetTokenAsync(tokenRequest)));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
+        }
     }
 }
