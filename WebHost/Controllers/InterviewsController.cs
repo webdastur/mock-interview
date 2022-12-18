@@ -38,6 +38,16 @@ public class InterviewsController : BaseController
     /// <summary>
     /// Add new Interview
     /// </summary>
+    /// /// <remarks>
+    /// Response Example:
+    /// 
+    ///     Post /Interviews
+    ///     {
+    ///       "title": "string",
+    ///       "description": "string",
+    ///       "category_id": 0
+    ///     }
+    /// </remarks>
     /// <param name="interviewModel"></param>
     [HttpPost]
     public IActionResult PostInterview(InterviewCreateModel interviewModel)

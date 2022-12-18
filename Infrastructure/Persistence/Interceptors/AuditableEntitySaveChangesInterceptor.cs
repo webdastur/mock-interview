@@ -39,21 +39,11 @@ internal class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
                 entry.Entity.CreatedAt = DateTime.UtcNow;
             }
 
-            if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
+            if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
             {
                 entry.Entity.UpdatedUserId = currentUser.GetUserId();
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
             }
         }
     }
-}
-
-public static class Extensions
-{
-    public static bool HasChangedOwnedEntities(this EntityEntry entry) =>
-        entry.References.Any(r => 
-            r.TargetEntry != null && 
-                r.TargetEntry.Metadata.IsOwned() && 
-                    r.TargetEntry.State == EntityState.Modified || 
-                        r.TargetEntry.State == EntityState.Added);
 }

@@ -50,7 +50,7 @@ namespace WebHost.Controllers
         }
 
         /// <summary>
-        /// Update New User
+        /// Update User
         /// </summary>
         /// <remarks>
         /// Response Example:
@@ -158,6 +158,10 @@ namespace WebHost.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Current User Info
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("info")]
         public async Task<IActionResult> GetUserInfo()
         {

@@ -121,7 +121,7 @@ public class UserService : IUserService
 
     public async Task<UserModel> GetUserInfo()
     {
-        User user = await userRepository.GetByIdAsync(currentUser.GetUserId());
+        User user = await userRepository.GetByIdIncAsync(currentUser.GetUserId(), new string[] { "Projects", "Experiences" });
 
         UserModel mappingModel = mapper.Map<UserModel>(user);
 

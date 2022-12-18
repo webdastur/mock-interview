@@ -35,6 +35,15 @@ public class InterviewCategoriesController : BaseController
     /// <summary>
     /// Post Interview Category
     /// </summary>
+    /// /// <remarks>
+    /// Response Example:
+    /// 
+    ///     Post /InterviewCategories
+    ///     {
+    ///       "name": "string",
+    ///       "description": "string"
+    ///     }
+    /// </remarks>
     /// <param name="category"></param>
     /// <returns></returns>
     [HttpPost]
