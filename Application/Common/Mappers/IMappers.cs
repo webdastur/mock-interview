@@ -1,4 +1,6 @@
 ﻿using Application.Services.Files;
+using Application.Services.InterviewCategory;
+using Application.Services.Interviews;
 using Application.Services.Users;
 using AutoMapper;
 using Domain.Entities;
@@ -16,5 +18,9 @@ public class IMappers : Profile
 		CreateMap<File, FileModel>().ReverseMap();
 		CreateMap<File, FileCreateModel>().ReverseMap();
 		CreateMap<User, InterviewerModel>().ReverseMap();
+		CreateMap<Interview, InterviewModel>().ReverseMap();
+		CreateMap<Interview, InterviewCreateModel>().ReverseMap();
+		CreateMap<InterviewCategory, InterviewCategoryModel>().ReverseMap();
+		CreateMap<InterviewCategory, InterviewCategoryCreateModel>().ReverseMap();
 	}
 }

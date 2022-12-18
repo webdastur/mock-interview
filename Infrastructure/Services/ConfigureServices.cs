@@ -1,6 +1,10 @@
 ﻿using Application.Services.Files;
+using Application.Services.InterviewCategory;
+using Application.Services.Interviews;
 using Application.Services.Users;
 using Infrastructure.Services.Files;
+using Infrastructure.Services.InterviewCategories;
+using Infrastructure.Services.Interviews;
 using Infrastructure.Services.Users;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +16,8 @@ public static class ConfigureServices
     {
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IFileService, FileService>();
+        services.AddScoped<IInterviewService, InterviewService>();
+        services.AddScoped<IInterviewCategoryService, InterviewCategoryService>();
 
         return services;
     }
