@@ -9,6 +9,7 @@ using Domain.Entities;
 using File = Domain.Entities.File;
 using Application.Services.ReservedInterviews;
 using Application.Services.Payments;
+using Application.Services.Experiences;
 
 namespace Application.Common.Mappers;
 
@@ -36,4 +37,14 @@ public class IMappers : Profile
         CreateMap<Payment, PaymentModel>().ReverseMap();
         CreateMap<Payment, PaymentCreateModel>().ReverseMap();
     }
+}
+		CreateMap<Interview, InterviewModel>().ReverseMap();
+		CreateMap<Interview, InterviewCreateModel>().ReverseMap();
+		CreateMap<InterviewCategory, InterviewCategoryModel>().ReverseMap();
+		CreateMap<InterviewCategory, InterviewCategoryCreateModel>().ReverseMap();
+		CreateMap<InterviewTime, InterviewTimeModel>().ReverseMap();
+		CreateMap<InterviewTime, CreateTimeModel>().ReverseMap();
+        CreateMap<Experience, ExperienceModel>().ReverseMap();
+        CreateMap<Experience, ExperienceCreateModel>().ReverseMap();
+	}
 }

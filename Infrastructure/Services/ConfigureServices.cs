@@ -11,6 +11,8 @@ using Infrastructure.Services.Users;
 using Microsoft.Extensions.DependencyInjection;
 using Application.Services.Projects;
 using Infrastructure.Services.Projects;
+using Application.Services.Experiences;
+using Infrastructure.Services.Experiences;
 
 namespace Infrastructure.Services;
 
@@ -25,6 +27,8 @@ public static class ConfigureServices
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<IInterviewService, InterviewService>();
         services.AddScoped<IInterviewCategoryService, InterviewCategoryService>();
+        services.AddScoped<IInterviewTimeService, InterviewTimeService>();
+        services.AddScoped<IExperienceService, ExperienceService>();
 
         return services;
     }

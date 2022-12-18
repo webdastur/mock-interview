@@ -41,7 +41,7 @@ public class InterviewService : IInterviewService
             paginatedRequestModel.Page,
                 paginatedRequestModel.PageSize,
                    query => query.OrderByDescending(order => order.UpdatedAt),
-                       new string[] { "Category", "User"})
+                       new string[] { "Category", "User", "Times"})
                            .ToListAsync();
 
         var interviewModels = mapper.Map<List<InterviewModel>>(interviews);
