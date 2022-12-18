@@ -1,6 +1,5 @@
 ﻿using Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using System.Security.Claims;
 
 namespace Infrastructure.Auth;
@@ -13,6 +12,7 @@ internal class CurrentUserMiddleware : IMiddleware
     {
         this.currenctUserInitializer = currenctUserInitializer;
     }
+
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         if (context.User.Identity.IsAuthenticated)

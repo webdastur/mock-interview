@@ -17,5 +17,7 @@ public class CreateUserModel
     public string Login { get; set; }
     public string Password { get; set; }
     public string Role { get; set; }
-    public FileModel Image { get; set; }
+
+    [JsonPropertyName("imege_id")]
+    public int? ImageId { get; set; }
 }
