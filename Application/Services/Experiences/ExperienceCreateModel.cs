@@ -8,7 +8,7 @@ public class ExperienceCreateModel
     public string Description { get; set; }
 
     [JsonPropertyName("level_id")]
-    public int LevelId { get; set; }
+    public required int LevelId { get; set; }
     public DateTime From { get; set; }
     public DateTime To { get; set; }
 }

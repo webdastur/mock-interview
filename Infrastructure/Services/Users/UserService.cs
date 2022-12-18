@@ -13,11 +13,16 @@ public class UserService : IUserService
 {
     private readonly IRepository<User> userRepository;
     private readonly IMapper mapper;
+    private readonly ICurrentUser currentUser;
 
-    public UserService(IRepository<User> userRepository, IMapper mapper)
+    public UserService(
+        IRepository<User> userRepository, 
+        IMapper mapper,
+        ICurrentUser currentUser)
     {
         this.userRepository = userRepository;
         this.mapper = mapper;
+        this.currentUser = currentUser;
     }
 
     public UserModel CreateUser(CreateUserModel createUserModel)
@@ -112,5 +117,14 @@ public class UserService : IUserService
                 pageNumber: paginatedRequestModel.Page,
                 pageSize: paginatedRequestModel.PageSize
             );
+    }
+
+    public async Task<UserModel> GetUserInfo()
+    {
+        User user = await userRepository.GetByIdAsync(currentUser.GetUserId());
+
+        UserModel mappingModel = mapper.Map<UserModel>(user);
+
+        return mappingModel;
     }
 }

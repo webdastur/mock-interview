@@ -1,5 +1,4 @@
-﻿using Application.Services.Files;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Application.Services.Users;
 

@@ -15,5 +15,5 @@ public class CreateTimeModel
 
 
     [JsonPropertyName("interview_id")]
-    public int InterviewId { get; set; }
+    public required int InterviewId { get; set; }
 }

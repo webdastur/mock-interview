@@ -70,9 +70,16 @@ namespace WebHost.Controllers
         [HttpPut]
         public async Task<IActionResult> PutUser(UpdateUserModel updateUserModel)
         {
-            UserModel userModel = await userService.UpdateUser(updateUserModel);
+            try
+            {
+                UserModel userModel = await userService.UpdateUser(updateUserModel);
 
-            return Ok(userModel);
+                return Ok(new ResponseModel(userModel));
+            }
+            catch(Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
 
 
@@ -83,8 +90,15 @@ namespace WebHost.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            await userService.DeleteUser(id);
-            return Ok();
+            try
+            {
+                await userService.DeleteUser(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
 
         /// <summary>
@@ -94,9 +108,16 @@ namespace WebHost.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            UserModel userModel = await userService.GetById(id);
+            try
+            {
+                UserModel userModel = await userService.GetById(id);
 
-            return Ok(userModel);
+                return Ok(new ResponseModel(userModel));
+            }
+            catch(Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
 
         /// <summary>
@@ -106,9 +127,16 @@ namespace WebHost.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> GetAllUser([FromQuery] PaginatedRequestModel paginatedRequestModel)
         {
-            PaginatedList<UserModel> userModels = await userService.GetAllUsers(paginatedRequestModel);
+            try
+            {
+                PaginatedList<UserModel> userModels = await userService.GetAllUsers(paginatedRequestModel);
 
-            return Ok(userModels);
+                return Ok(new ResponseModel(userModels));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
 
         /// <summary>
@@ -123,6 +151,19 @@ namespace WebHost.Controllers
             {
                 PaginatedList<InterviewerModel> interviewers = await userService.GetAllInterviewers(paginatedRequestModel);
                 return Ok(new ResponseModel(interviewers));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
+        }
+
+        [HttpGet("info")]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            try
+            {
+                return Ok(new ResponseModel(await userService.GetUserInfo()));
             }
             catch (Exception ex)
             {
