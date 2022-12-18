@@ -1,4 +1,6 @@
 ﻿using Application.Common.Interfaces;
+using Application.Identity;
+using Infrastructure.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +10,11 @@ public static class ConfigureServices
 {
     internal static IServiceCollection AddAuth(this IServiceCollection services)
     {
+        services.AddOptions<JwtSetting>()
+           .BindConfiguration(nameof(JwtSetting));
+
+        services.AddScoped<ITokenService, TokenService>();
+
         services.AddCurrentUser();
 
         return services;
