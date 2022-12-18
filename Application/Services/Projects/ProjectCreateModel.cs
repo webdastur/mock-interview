@@ -1,5 +1,4 @@
-﻿using Application.Common.Model;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Application.Services.Projects;
 

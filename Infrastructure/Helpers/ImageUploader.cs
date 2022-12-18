@@ -6,31 +6,30 @@ namespace Infrastructure.Helpers;
 
 internal static class ImageUploader
 {
-    private static string image_url;
-    private static string image_path;
+    private static string imageUrl;
+    private static string imagePath;
 
     public static void ImageConfigure(this IServiceCollection services, IConfiguration configuration)
     {
-        image_path = configuration["ImageSetting:Path"];
-        image_url = configuration["ImageSetting:Url"];
+        imagePath = configuration["ImageSetting:Path"];
+        imageUrl = configuration["ImageSetting:Url"];
     }
     public static async Task<string> UploadImage(IFormFile formFile)
     {
-        if (formFile == null)
-            throw new ArgumentNullException(nameof(formFile));
+        ArgumentNullException.ThrowIfNull(formFile);
         string fileExt = Path.GetExtension(formFile.FileName);
         string fileName = Guid.NewGuid().ToString().Replace("-", "") + fileExt;
 
-        if (!Directory.Exists(image_path))
-            Directory.CreateDirectory(image_path);
+        if (!Directory.Exists(imagePath))
+            Directory.CreateDirectory(imagePath);
 
-        string path = Path.Combine(image_path, fileName);
+        string path = Path.Combine(imagePath, fileName);
 
         using var fileStream = File.Open(path, FileMode.Create);
         await formFile.OpenReadStream().CopyToAsync(fileStream);
 
         return fileName;
     }
-    public static string ImagePath() => image_path;
-    public static string ImageUrl() => image_url;
+    public static string ImagePath() => imagePath;
+    public static string ImageUrl() => imageUrl;
 }

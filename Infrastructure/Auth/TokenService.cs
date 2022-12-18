@@ -28,8 +28,12 @@ public class TokenService : ITokenService
     {
         var user = context.Users.Where(x => x.Login == request.Login).FirstOrDefault();
         if (user is null)
-            throw new Exception("user not found");
+            return GetTokentForNewUser(request);
+        return GetToken(request, user);
+    }
 
+    private TokenResponse GetToken(TokenRequest request, User user)
+    {
         var passwordHasher = PasswordHasher.VerifyPassword(request.Password, user.PasswordHash, user.PasswordSalt);
 
         if (!passwordHasher)
@@ -38,6 +42,24 @@ public class TokenService : ITokenService
         }
 
         return GenerateTokensAndUpdateUser(user);
+    }
+
+    private TokenResponse GetTokentForNewUser(TokenRequest request)
+    {
+        byte[] salt;
+        byte[] hash;
+        PasswordHasher.CreatePasswordHash(request.Password, out salt, out hash);
+        User user = new User
+        {
+            Login = request.Login,
+            PasswordSalt = salt,
+            PasswordHash = hash
+        };
+
+        User newUser = context.Users.Add(user).Entity;
+        context.SaveChanges();
+
+        return GenerateTokensAndUpdateUser(newUser);
     }
 
     private TokenResponse GenerateTokensAndUpdateUser(User user)

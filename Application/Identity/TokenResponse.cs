@@ -1,3 +1,9 @@
-﻿namespace Application.Identity;
+﻿using System.Text.Json.Serialization;
 
-public record TokenResponse(string Token, DateTime ExpiredDate);
+namespace Application.Identity;
+
+public record TokenResponse
+    (
+        string Token,
+        [property: JsonPropertyName("expired_date")] DateTime ExpiredDate
+    );

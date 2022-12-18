@@ -1,6 +1,5 @@
 ﻿using Application.Common.Model;
 using Application.Services.Levels;
-using Application.Services.Users;
 
 namespace Application.Services.Experiences;
 

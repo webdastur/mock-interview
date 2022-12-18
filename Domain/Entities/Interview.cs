@@ -7,8 +7,8 @@ public class Interview : AuditableEntity
     public string Title { get; set; }
     public string Description { get; set; }
     public int CategoryId { get; set; }
-    public List<InterviewTime> Times { get; set; }
-    public List<InterviewLevel> Levels { get; set; }
+    public ICollection<InterviewTime> Times { get; set; }
+    public ICollection<InterviewLevel> Levels { get; set; }
 
     public InterviewCategory Category { get; set; }
     public User User { get; set; }
