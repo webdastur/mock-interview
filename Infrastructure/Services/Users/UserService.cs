@@ -50,7 +50,7 @@ public class UserService : IUserService
         return mapper.Map<UserModel>(userEntity);
     }
 
-    public async Task<PaginatedList<User>> GetPaginatedList(PaginatedRequestModel paginatedRequestModel)
+    public async Task<PaginatedList<UserModel>> GetPaginatedList(PaginatedRequestModel paginatedRequestModel)
     {
         int allUsersCount = await userRepository.GetCountAsync();
         List<User> users = await userRepository.GetAllByOrderPage(
@@ -59,9 +59,9 @@ public class UserService : IUserService
                     query => query.OrderBy(order => order.Id)
                         ).ToListAsync();
 
-        return new PaginatedList<User>
+        return new PaginatedList<UserModel>
             (
-                items: mapper.Map<List<User>>(users),
+                items: mapper.Map<List<UserModel>>(users),
                 count: allUsersCount,
                 pageNumber: paginatedRequestModel.Page,
                 pageSize: paginatedRequestModel.PageSize
@@ -70,12 +70,18 @@ public class UserService : IUserService
 
     public async Task<UserModel> UpdateUser(UpdateUserModel updateUserModel)
     {
+        byte[] salt;
+        byte[] hash;
+        PasswordHasher.CreatePasswordHash(updateUserModel.Password, out salt, out hash);
+
         User oldUserEntity = await userRepository.GetByIdAsync(updateUserModel.Id);
 
         if (oldUserEntity is null)
             throw new Exception("user not found");
 
         User mappingUserModel = mapper.Map(updateUserModel, oldUserEntity);
+        mappingUserModel.PasswordHash = hash;
+        mappingUserModel.PasswordSalt = salt;
         userRepository.UpdateAsync(mappingUserModel);
 
         return mapper.Map<UserModel>(mappingUserModel);

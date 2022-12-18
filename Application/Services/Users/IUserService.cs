@@ -10,7 +10,7 @@ namespace Application.Services.Users;
 
 public interface IUserService
 {
-    Task<PaginatedList<User>> GetPaginatedList(PaginatedRequestModel paginatedRequestModel);
+    Task<PaginatedList<UserModel>> GetPaginatedList(PaginatedRequestModel paginatedRequestModel);
     Task<UserModel> GetById(int userId);
     UserModel CreateUser(CreateUserModel createUserModel);
     Task<UserModel> UpdateUser(UpdateUserModel updateUserModel);
