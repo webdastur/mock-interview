@@ -1,4 +1,7 @@
-﻿namespace Application.Common.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace Application.Common.Model;
+
 public class ResponseModel
 {
     public ResponseModel()
@@ -31,10 +34,12 @@ public class ResponseModel
     }
 
     public object Data { get; set; }
+
+    [JsonPropertyName("status_code")]
     public ResponseStatusCode StatusCode { get; set; }
     public string Message { get; set; }
-
 }
+
 public enum ResponseStatusCode
 {
     Ok = 200,
