@@ -1,5 +1,4 @@
-﻿using Application.Services.Files;
-using Application.Services.Users;
+﻿using Application.Services.Users;
 using AutoMapper;
 using Domain.Entities;
 using File = Domain.Entities.File;
