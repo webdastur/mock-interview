@@ -1,19 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:mock_interview/core/bloc/user/user_cubit.dart';
 import 'package:mock_interview/core/extensions/app_extensions.dart';
 import 'package:mock_interview/core/models/api/interviewer/response/interviewer_response.dart';
+import 'package:mock_interview/core/routes/module_init_guard.dart';
 import 'package:mock_interview/core/services/api_service.dart';
 import 'package:mock_interview/core/utils/assets.gen.dart';
+import 'package:mock_interview/ui/pages/login/login_page.dart';
 
 class HomePageModule extends Module {
   @override
+  List<Bind<Object>> get binds => [
+        Bind.singleton<UserCubit>((i) => UserCubit()),
+      ];
+
+  @override
   List<ModularRoute> get routes => [
-        ChildRoute(
-          HomePage.routeName,
-          child: (context, args) => HomePage(),
-        ),
+        ChildRoute(HomePage.routeName,
+            child: (context, args) => HomePage(), guards: [ModuleInitGuard()]),
       ];
 }
 
@@ -74,22 +81,41 @@ class _HomePageState extends State<HomePage> {
         header: PageHeader(
           title: const Text("Mock Interview"),
           commandBar: CommandBarCard(
-            child: CommandBar(
-              overflowBehavior: CommandBarOverflowBehavior.noWrap,
-              mainAxisAlignment: MainAxisAlignment.center,
-              primaryItems: [
-                CommandBarButton(
-                  icon: const Icon(FluentIcons.people_add),
-                  label: const Text("Register"),
-                  onPressed: () {},
-                ),
-                const CommandBarSeparator(),
-                CommandBarButton(
-                  icon: const Icon(FluentIcons.follow_user),
-                  label: const Text("Login"),
-                  onPressed: () {},
-                ),
-              ],
+            child: BlocBuilder<UserCubit, UserState>(
+              bloc: UserCubit.to,
+              builder: (context, state) {
+                return CommandBar(
+                  overflowBehavior: CommandBarOverflowBehavior.noWrap,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  primaryItems: [
+                    CommandBarButton(
+                      icon: const Icon(FluentIcons.responses_menu),
+                      label: const Text("Menu"),
+                      onPressed: () {
+                        Modular.to.pushNamed(LoginPage.routeName);
+                      },
+                    ),
+                    if (state.isLoggedIn)
+                    const CommandBarSeparator(),
+                    if (!state.isLoggedIn)
+                      CommandBarButton(
+                        icon: const Icon(FluentIcons.people_add),
+                        label: const Text("Login & Register"),
+                        onPressed: () {
+                          Modular.to.pushNamed(LoginPage.routeName);
+                        },
+                      ),
+                    if (state.isLoggedIn)
+                      CommandBarButton(
+                        icon: const Icon(FluentIcons.people_add),
+                        label: const Text("Log Out"),
+                        onPressed: () {
+                          UserCubit.to.logout();
+                        },
+                      ),
+                  ],
+                );
+              },
             ),
           ),
         ),

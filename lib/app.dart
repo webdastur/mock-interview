@@ -4,10 +4,12 @@ import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mock_interview/core/bloc/loader/loader_cubit.dart';
+import 'package:mock_interview/core/bloc/user/user_cubit.dart';
 import 'package:mock_interview/core/services/api_service.dart';
 import 'package:mock_interview/core/services/hive_service.dart';
 import 'package:mock_interview/theme.dart';
 import 'package:mock_interview/ui/pages/home/home_page.dart';
+import 'package:mock_interview/ui/pages/login/login_page.dart';
 import 'package:mock_interview/ui/pages/not_found/not_found_page.dart';
 import 'package:provider/provider.dart' as p;
 import 'package:responsive_framework/responsive_framework.dart';
@@ -18,7 +20,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Modular.setInitialRoute(
-      HomePage.routeName, // TODO: Initial route
+      HomePage.routeName,
     );
     Modular.setObservers([BotToastNavigatorObserver()]);
 
@@ -101,7 +103,6 @@ class AppModule extends Module {
         // Bind.singleton<HttpService>((i) => HttpService.init()),
         AsyncBind<HiveService>((i) => HiveService.init()),
         Bind.lazySingleton((i) => APIService.init()),
-        // AsyncBind<DBService>((i) => DBService.init()),
         // Bind.lazySingleton<AuthService>((i) => AuthService()),
         // Bind.lazySingleton<ProfileService>((i) => ProfileService()),
         // Bind.lazySingleton<CurrencyService>((i) => CurrencyService()),
@@ -120,7 +121,7 @@ class AppModule extends Module {
   List<ModularRoute> get routes => [
         ModuleRoute('/', module: NotFoundPageModule()),
         ModuleRoute('/', module: HomePageModule()),
-        // ModuleRoute('/', module: ChangeLanguageModule()),
+        ModuleRoute('/', module: LoginPageModule()),
         // ModuleRoute('/', module: ChangePhoneNumberModule()),
         // ModuleRoute('/', module: EditProfilePageModule()),
         // ModuleRoute('/', module: ExclusivePageModule()),
