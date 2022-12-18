@@ -7,6 +7,7 @@ using Application.Services.Users;
 using AutoMapper;
 using Domain.Entities;
 using File = Domain.Entities.File;
+using Application.Services.Experiences;
 
 namespace Application.Common.Mappers;
 
@@ -35,5 +36,7 @@ public class IMappers : Profile
 		CreateMap<InterviewCategory, InterviewCategoryCreateModel>().ReverseMap();
 		CreateMap<InterviewTime, InterviewTimeModel>().ReverseMap();
 		CreateMap<InterviewTime, CreateTimeModel>().ReverseMap();
+        CreateMap<Experience, ExperienceModel>().ReverseMap();
+        CreateMap<Experience, ExperienceCreateModel>().ReverseMap();
 	}
 }
