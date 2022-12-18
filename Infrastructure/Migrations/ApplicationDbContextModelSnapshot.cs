@@ -66,7 +66,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Experiences");
+                    b.ToTable("Experiences", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.File", b =>
@@ -85,7 +85,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Files");
+                    b.ToTable("Files", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Interview", b =>
@@ -126,7 +126,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Interviews");
+                    b.ToTable("Interviews", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.InterviewCategory", b =>
@@ -157,7 +157,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InterviewCategories");
+                    b.ToTable("InterviewCategories", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.InterviewLevel", b =>
@@ -183,7 +183,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("InterviewLevels");
+                    b.ToTable("InterviewLevels", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.InterviewTime", b =>
@@ -210,7 +210,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("InterviewId");
 
-                    b.ToTable("InterviewTimes");
+                    b.ToTable("InterviewTimes", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Level", b =>
@@ -238,7 +238,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Levels");
+                    b.ToTable("Levels", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Payment", b =>
@@ -269,7 +269,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Project", b =>
@@ -313,7 +313,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ReservedInterview", b =>
@@ -354,7 +354,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ReservedInterviews");
+                    b.ToTable("ReservedInterviews", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Transaction", b =>
@@ -399,7 +399,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transactions", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -448,7 +448,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new

@@ -11,4 +11,5 @@ public class Interview : AuditableEntity
     public List<InterviewLevel> Levels { get; set; }
 
     public InterviewCategory Category { get; set; }
+    public User User { get; set; }
 }
