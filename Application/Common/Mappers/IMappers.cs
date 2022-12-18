@@ -1,6 +1,8 @@
-﻿using Application.Services.Users;
+﻿using Application.Services.Files;
+using Application.Services.Users;
 using AutoMapper;
 using Domain.Entities;
+using File = Domain.Entities.File;
 
 namespace Application.Common.Mappers;
 
@@ -11,5 +13,7 @@ public class IMappers : Profile
 		CreateMap<User, UserModel>().ReverseMap();
 		CreateMap<User, CreateUserModel>().ReverseMap();
 		CreateMap<User, UpdateUserModel>().ReverseMap();
+		CreateMap<File, FileModel>().ReverseMap();
+		CreateMap<File, FileCreateModel>().ReverseMap();
 	}
 }
