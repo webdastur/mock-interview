@@ -2,7 +2,7 @@
 
 namespace Application.Common.Model;
 
-public class PaginatedRequestModel
+public class FilteredRequestModel
 {
     public int Page { get; set; } = 1;
 
@@ -14,4 +14,6 @@ public class PaginatedRequestModel
 
     [JsonPropertyName("is-ask")]
     public bool IsAsc { get; set; } = true;
+
+    public string Search { get; set; }
 }

@@ -9,6 +9,7 @@ public interface IRepository<T> where T : BaseEntity
     void UpdateAsync(T entity);
     void DeleteAsync(T entity);
     Task<T> GetByIdAsync(int id, bool disableTracking = true);
+    IQueryable<T> GetAllByExp(Expression<Func<T, bool>> exp, bool disableTracking = true);
     IQueryable<T> GetAllByOrderPage(int page, int limit, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, bool disableTracking = true);
     IQueryable<T> GetAllByExpOrderPage(int page, int limit, Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, bool disableTracking = true);
     IQueryable<T> GetAllByIncPage(int page, int limit, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, string[] includeTables, bool disableTracking = true);

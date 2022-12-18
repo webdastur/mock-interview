@@ -22,7 +22,7 @@ public class UserService : IUserService
 
     public UserModel CreateUser(CreateUserModel createUserModel)
     {
-        if (createUserModel.Role.Equals(Role.Interviewer) && createUserModel.Image is null)
+        if (createUserModel.Role.Equals(Role.Interviewer) && createUserModel.ImageId is null)
             throw new Exception("Image is required for interviewer");
 
         byte[] salt;
@@ -31,8 +31,8 @@ public class UserService : IUserService
         User mappedUserModel = mapper.Map<User>(createUserModel);
         mappedUserModel.PasswordHash = hash;
         mappedUserModel.PasswordSalt = salt;
-        if(createUserModel.Image is not null)
-            mappedUserModel.ImageId = createUserModel.Image.Id;
+        if(createUserModel.ImageId is not null)
+            mappedUserModel.ImageId = createUserModel.ImageId;
 
         userRepository.Add(mappedUserModel);
         return mapper.Map<UserModel>(mappedUserModel);

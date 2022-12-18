@@ -53,4 +53,23 @@ public class InterviewsController : BaseController
             return Ok(new ExceptionModel(ex.Message));
         }
     }
+
+    /// <summary>
+    /// Get By filtered
+    /// </summary>
+    /// <param name="filteredRequestModel"></param>
+    /// <returns></returns>
+    [HttpGet("filter")]
+    public async Task<IActionResult> GetByFilter([FromQuery]FilteredRequestModel filteredRequestModel)
+    {
+        try
+        {
+            PaginatedList<InterviewModel> interviews = await interviewService.GetByFilteredInterviews(filteredRequestModel);
+            return Ok(new ResponseModel(interviews));
+        }
+        catch (Exception ex)
+        {
+            return Ok(new ExceptionModel(ex.Message));
+        }
+    }
 }

@@ -38,11 +38,19 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         IQueryable<T> query = context.Set<T>();
 
         if (disableTracking)
-        {
             query.AsNoTracking();
-        }
 
         return await query.Where(x => x.Id == id).FirstOrDefaultAsync();
+    }
+
+    public IQueryable<T> GetAllByExp(Expression<Func<T, bool>> exp, bool disableTracking = true)
+    {
+        IQueryable<T> query = context.Set<T>();
+
+        if (disableTracking)
+            query = query.AsNoTracking();
+
+        return query.Where(exp);
     }
 
     public IQueryable<T> GetAllByExpIncPage(int page, int limit, Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, string[] includeTables, bool disableTracking = true)
@@ -50,9 +58,7 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         IQueryable<T> query = context.Set<T>();
 
         if (disableTracking)
-        {
             query = query.AsNoTracking();
-        }
 
         query = orderBy(query);
         query = query.Where(predicate);
@@ -74,9 +80,7 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         IQueryable<T> query = context.Set<T>();
 
         if (disableTracking)
-        {
             query = query.AsNoTracking();
-        }
 
         return query.CountAsync();
     }
@@ -86,9 +90,7 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         IQueryable<T> query = context.Set<T>();
 
         if (disableTracking)
-        {
             query = query.AsNoTracking();
-        }
 
         return query.Where(predicate).CountAsync();
     }
@@ -98,9 +100,7 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         IQueryable<T> query = context.Set<T>();
 
         if (disableTracking)
-        {
             query = query.AsNoTracking();
-        }
 
         query = orderBy(query);
         query = query.Where(predicate);
@@ -117,9 +117,7 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         IQueryable<T> query = context.Set<T>();
 
         if (disableTracking)
-        {
             query = query.AsNoTracking();
-        }
 
         foreach (var table in includeTables)
         {
@@ -139,9 +137,7 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         IQueryable<T> query = context.Set<T>();
 
         if (disableTracking)
-        {
             query = query.AsNoTracking();
-        }
 
         query = orderBy(query);
         if (page > 1) query = query.Skip((page - 1) * limit);
