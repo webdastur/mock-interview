@@ -89,7 +89,7 @@ namespace WebHost.Controllers
         [HttpGet("list")]
         public async ValueTask<IActionResult> GetLevelsByPagination(int page, int pageSize)
         {
-            var paginatedLevels = await levelService.GetPaginatedList(new PaginatedRequestModel { Page = page, PageSize = pageSize });
+            PaginatedList<LevelModel> paginatedLevels = await levelService.GetPaginatedList(new PaginatedRequestModel { Page = page, PageSize = pageSize });
             return Ok(paginatedLevels);
         }
     }
