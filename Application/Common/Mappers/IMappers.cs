@@ -1,4 +1,5 @@
-﻿using Application.Services.Users;
+﻿using Application.Services.Levels;
+using Application.Services.Users;
 using AutoMapper;
 using Domain.Entities;
 
@@ -11,5 +12,8 @@ public class IMappers : Profile
 		CreateMap<User, UserModel>().ReverseMap();
 		CreateMap<User, CreateUserModel>().ReverseMap();
 		CreateMap<User, UpdateUserModel>().ReverseMap();
-	}
+        CreateMap<Level, LevelModel>().ReverseMap();
+        CreateMap<Level, CreateLevelModel>().ReverseMap();
+        CreateMap<Level, UpdateLevelModel>().ReverseMap();
+    }
 }
