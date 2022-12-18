@@ -22,8 +22,7 @@ namespace WebHost.Controllers
         /// 
         ///     Post /payments
         ///     {
-        ///       "interViewId": "int",
-        ///       "userId": "0",
+        ///       "reserved_interView_id": "0",
         ///       "PaymentStatus" : "string"
         ///     }
         /// </remarks>

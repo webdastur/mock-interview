@@ -27,8 +27,7 @@ namespace WebHost.Controllers
         /// 
         ///     Post /projects
         ///     {
-        ///       "interviewId": "0"
-        ///       "user_id": "0"
+        ///       "interview_id": "0"
         ///       "start_time": "datetime"
         ///       "end_time": "datetime"
         ///     }

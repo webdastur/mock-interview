@@ -13,6 +13,10 @@ using Application.Services.Projects;
 using Infrastructure.Services.Projects;
 using Application.Services.Experiences;
 using Infrastructure.Services.Experiences;
+using Application.Services.Payments;
+using Infrastructure.Services.Payments;
+using Application.Services.ReservedInterviews;
+using Infrastructure.Services.ReservedInterviews;
 
 namespace Infrastructure.Services;
 
@@ -29,6 +33,8 @@ public static class ConfigureServices
         services.AddScoped<IInterviewCategoryService, InterviewCategoryService>();
         services.AddScoped<IInterviewTimeService, InterviewTimeService>();
         services.AddScoped<IExperienceService, ExperienceService>();
+        services.AddScoped<IPaymentService, PaymentService>();
+        services.AddScoped< IReservedInterviewService , ReservedInterviewService>();
 
         return services;
     }
