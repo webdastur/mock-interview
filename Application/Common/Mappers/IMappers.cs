@@ -25,10 +25,11 @@ public class IMappers : Profile
         CreateMap<Level, LevelModel>().ReverseMap();
         CreateMap<Project, ProjectCreateModel>().ReverseMap();
         CreateMap<Project, ProjectModel>().ReverseMap();
-    }
 		CreateMap<Interview, InterviewModel>().ReverseMap();
 		CreateMap<Interview, InterviewCreateModel>().ReverseMap();
 		CreateMap<InterviewCategory, InterviewCategoryModel>().ReverseMap();
 		CreateMap<InterviewCategory, InterviewCategoryCreateModel>().ReverseMap();
+		CreateMap<InterviewTime, InterviewTimeModel>().ReverseMap();
+		CreateMap<InterviewTime, CreateTimeModel>().ReverseMap();
 	}
 }
