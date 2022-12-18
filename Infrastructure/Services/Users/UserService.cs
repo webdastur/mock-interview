@@ -22,7 +22,7 @@ public class UserService : IUserService
 
     public UserModel CreateUser(CreateUserModel createUserModel)
     {
-        if (createUserModel.Role.Equals(Role.Interviewer) && createUserModel.ImageId is null)
+        if (createUserModel.Role.Equals(Role.Interviewer) && createUserModel.Image is null)
             throw new Exception("Image is required for interviewer");
 
         byte[] salt;
@@ -31,6 +31,8 @@ public class UserService : IUserService
         User mappedUserModel = mapper.Map<User>(createUserModel);
         mappedUserModel.PasswordHash = hash;
         mappedUserModel.PasswordSalt = salt;
+        if(createUserModel.Image is not null)
+            mappedUserModel.ImageId = createUserModel.Image.Id;
 
         userRepository.Add(mappedUserModel);
         return mapper.Map<UserModel>(mappedUserModel);
@@ -47,7 +49,7 @@ public class UserService : IUserService
 
     public async Task<UserModel> GetById(int userId)
     {
-        User userEntity = await userRepository.GetByIdAsync(userId);
+        User userEntity = await userRepository.GetAllByExp(expression => expression.Id == userId).Include(query => query.Image).FirstOrDefaultAsync() ;
         if (userEntity is null)
             throw new Exception("user not found");
 
@@ -61,7 +63,7 @@ public class UserService : IUserService
             paginatedRequestModel.Page,
                 paginatedRequestModel.PageSize,
                     query => query.OrderBy(order => order.Id),
-                        new string[] { "Experiences", "Projects"}
+                        new string[] { "Experiences", "Projects", "Image" }
                             ).ToListAsync();
 
         return new PaginatedList<UserModel>

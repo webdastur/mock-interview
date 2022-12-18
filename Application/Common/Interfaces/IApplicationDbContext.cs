@@ -16,6 +16,5 @@ public interface IApplicationDbContext
     public DbSet<Payment> Payments { get; }
     public DbSet<Project> Projects { get; }
     public DbSet<ReservedInterview> ReservedInterviews { get; }
-    public DbSet<Transaction> Transactions { get; }
     public DbSet<User> Users { get; }
 }

@@ -24,5 +24,4 @@ public class User : AuditableEntity
     public ICollection<Project> Projects { get; set; }
     public ICollection<Experience> Experiences { get; set; }
     public ICollection<Interview> Interviews { get; set; }
-    public ICollection<Transaction> Transactions { get; set; }
 }
