@@ -37,15 +37,8 @@ namespace WebHost.Controllers
         [HttpPost]
         public IActionResult PostUser(CreateUserModel createUserModel)
         {
-            try
-            {
-                UserModel userModel = userService.CreateUser(createUserModel);
-                return Ok(new ResponseModel(userModel));
-            }
-            catch(Exception ex)
-            {
-                return Ok(new ExceptionModel(ex.Message));
-            }
+            UserModel userModel = userService.CreateUser(createUserModel);
+            return Ok(userModel);
         }
 
         /// <summary>
@@ -74,6 +67,11 @@ namespace WebHost.Controllers
             return Ok(userModel);
         }
 
+
+        /// <summary>
+        /// Delete User
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
@@ -81,6 +79,10 @@ namespace WebHost.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Get User By Id
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -89,12 +91,34 @@ namespace WebHost.Controllers
             return Ok(userModel);
         }
 
+        /// <summary>
+        /// Get All Users
+        /// </summary>
+        /// <param name="paginatedRequestModel"></param>
         [HttpGet("list")]
-        public async Task<IActionResult> GetAllUser([FromQuery]PaginatedRequestModel paginatedRequestModel)
+        public async Task<IActionResult> GetAllUser([FromQuery] PaginatedRequestModel paginatedRequestModel)
         {
-            PaginatedList<UserModel> userModels = await userService.GetPaginatedList(paginatedRequestModel);
+            PaginatedList<UserModel> userModels = await userService.GetAllUsers(paginatedRequestModel);
 
             return Ok(userModels);
+        }
+
+        /// <summary>
+        /// Get All Interviewers
+        /// </summary>
+        /// <param name="paginatedRequestModel"></param>
+        [HttpGet("interviewers")]
+        public async Task<IActionResult> GetInterviewer([FromQuery] PaginatedRequestModel paginatedRequestModel)
+        {
+            try
+            {
+                PaginatedList<InterviewerModel> interviewers = await userService.GetAllInterviewers(paginatedRequestModel);
+                return Ok(new ResponseModel(interviewers));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ExceptionModel(ex.Message));
+            }
         }
     }
 }

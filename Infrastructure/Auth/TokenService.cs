@@ -27,6 +27,8 @@ public class TokenService : ITokenService
     public TokenResponse GetTokenAsync(TokenRequest request)
     {
         var user = context.Users.Where(x => x.Login == request.Login).FirstOrDefault();
+        if (user is null)
+            throw new Exception("user not found");
 
         var passwordHasher = PasswordHasher.VerifyPassword(request.Password, user.PasswordHash, user.PasswordSalt);
 

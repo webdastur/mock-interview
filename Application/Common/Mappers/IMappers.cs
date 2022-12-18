@@ -12,5 +12,8 @@ public class IMappers : Profile
 		CreateMap<User, UserModel>().ReverseMap();
 		CreateMap<User, CreateUserModel>().ReverseMap();
 		CreateMap<User, UpdateUserModel>().ReverseMap();
+		CreateMap<File, FileModel>().ReverseMap();
+		CreateMap<File, FileCreateModel>().ReverseMap();
+		CreateMap<User, InterviewerModel>().ReverseMap();
 	}
 }

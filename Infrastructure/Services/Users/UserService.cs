@@ -3,6 +3,7 @@ using Application.Common.Model;
 using Application.Services.Users;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Enums;
 using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 
@@ -50,7 +51,7 @@ public class UserService : IUserService
         return mapper.Map<UserModel>(userEntity);
     }
 
-    public async Task<PaginatedList<UserModel>> GetPaginatedList(PaginatedRequestModel paginatedRequestModel)
+    public async Task<PaginatedList<UserModel>> GetAllUsers(PaginatedRequestModel paginatedRequestModel)
     {
         int allUsersCount = await userRepository.GetCountAsync();
         List<User> users = await userRepository.GetAllByOrderPage(
@@ -85,5 +86,25 @@ public class UserService : IUserService
         userRepository.UpdateAsync(mappingUserModel);
 
         return mapper.Map<UserModel>(mappingUserModel);
+    }
+
+    public async Task<PaginatedList<InterviewerModel>> GetAllInterviewers(PaginatedRequestModel paginatedRequestModel)
+    {
+        int allUsersCount = await userRepository.GetCountExpAsync(x => x.Role == Role.Interviewer);
+        List<User> users = await userRepository.GetAllByExpIncPage(
+            paginatedRequestModel.Page,
+                paginatedRequestModel.PageSize,
+                    query => query.Role == Role.Interviewer,
+                        query => query.OrderBy(order => order.Id),
+                            new string[] { "Projects" }
+                                ).ToListAsync();
+
+        return new PaginatedList<InterviewerModel>
+            (
+                items: mapper.Map<List<InterviewerModel>>(users),
+                count: allUsersCount,
+                pageNumber: paginatedRequestModel.Page,
+                pageSize: paginatedRequestModel.PageSize
+            );
     }
 }
