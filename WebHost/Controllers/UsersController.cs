@@ -1,5 +1,6 @@
 ﻿using Application.Common.Model;
 using Application.Services.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -107,6 +108,7 @@ namespace WebHost.Controllers
         /// Get All Interviewers
         /// </summary>
         /// <param name="paginatedRequestModel"></param>
+        [AllowAnonymous]
         [HttpGet("interviewers")]
         public async Task<IActionResult> GetInterviewer([FromQuery] PaginatedRequestModel paginatedRequestModel)
         {
