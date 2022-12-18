@@ -1,5 +1,6 @@
 using WebHost.Services;
 using Infrastructure;
+using Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddWebHost(builder.Configuration);
 builder.Services.AddInfrastructure();
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

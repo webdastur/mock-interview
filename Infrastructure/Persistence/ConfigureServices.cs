@@ -6,6 +6,7 @@ using Infrastructure.Persistence.Initializer;
 using Microsoft.AspNetCore.Builder;
 using Application.Common.Interfaces;
 using Infrastructure.Persistence.Interceptors;
+using Infrastructure.Persistence.Repositories;
 
 namespace Infrastructure.Persistence;
 
@@ -26,6 +27,7 @@ internal static class ConfigureServices
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
         services.AddTransient<ApplicationDbInitializer>();
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         return services;
     }
