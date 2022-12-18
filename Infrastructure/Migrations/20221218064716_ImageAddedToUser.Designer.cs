@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221218064716_ImageAddedToUser")]
+    partial class ImageAddedToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +69,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Experiences", (string)null);
+                    b.ToTable("Experiences");
                 });
 
             modelBuilder.Entity("Domain.Entities.File", b =>
@@ -85,7 +88,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Files", (string)null);
+                    b.ToTable("Files");
                 });
 
             modelBuilder.Entity("Domain.Entities.Interview", b =>
@@ -126,7 +129,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Interviews", (string)null);
+                    b.ToTable("Interviews");
                 });
 
             modelBuilder.Entity("Domain.Entities.InterviewCategory", b =>
@@ -157,7 +160,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InterviewCategories", (string)null);
+                    b.ToTable("InterviewCategories");
                 });
 
             modelBuilder.Entity("Domain.Entities.InterviewLevel", b =>
@@ -183,7 +186,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("InterviewLevels", (string)null);
+                    b.ToTable("InterviewLevels");
                 });
 
             modelBuilder.Entity("Domain.Entities.InterviewTime", b =>
@@ -210,7 +213,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("InterviewId");
 
-                    b.ToTable("InterviewTimes", (string)null);
+                    b.ToTable("InterviewTimes");
                 });
 
             modelBuilder.Entity("Domain.Entities.Level", b =>
@@ -238,7 +241,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Levels", (string)null);
+                    b.ToTable("Levels");
                 });
 
             modelBuilder.Entity("Domain.Entities.Payment", b =>
@@ -269,7 +272,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payments", (string)null);
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Domain.Entities.Project", b =>
@@ -313,7 +316,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Domain.Entities.ReservedInterview", b =>
@@ -354,7 +357,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ReservedInterviews", (string)null);
+                    b.ToTable("ReservedInterviews");
                 });
 
             modelBuilder.Entity("Domain.Entities.Transaction", b =>
@@ -399,7 +402,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Transactions", (string)null);
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
