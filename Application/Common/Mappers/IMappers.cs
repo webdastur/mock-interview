@@ -29,5 +29,11 @@ public class IMappers : Profile
         CreateMap<Interview, InterviewCreateModel>().ReverseMap();
         CreateMap<InterviewCategory, InterviewCategoryModel>().ReverseMap();
         CreateMap<InterviewCategory, InterviewCategoryCreateModel>().ReverseMap();
-    }
+		CreateMap<Interview, InterviewModel>().ReverseMap();
+		CreateMap<Interview, InterviewCreateModel>().ReverseMap();
+		CreateMap<InterviewCategory, InterviewCategoryModel>().ReverseMap();
+		CreateMap<InterviewCategory, InterviewCategoryCreateModel>().ReverseMap();
+		CreateMap<InterviewTime, InterviewTimeModel>().ReverseMap();
+		CreateMap<InterviewTime, CreateTimeModel>().ReverseMap();
+	}
 }

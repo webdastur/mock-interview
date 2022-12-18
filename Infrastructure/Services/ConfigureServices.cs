@@ -25,6 +25,7 @@ public static class ConfigureServices
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<IInterviewService, InterviewService>();
         services.AddScoped<IInterviewCategoryService, InterviewCategoryService>();
+        services.AddScoped<IInterviewTimeService, InterviewTimeService>();
 
         return services;
     }

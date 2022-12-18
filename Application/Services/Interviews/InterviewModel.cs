@@ -10,4 +10,5 @@ public class InterviewModel : BaseModel
     public string Description { get; set; }
     public InterviewCategoryModel Category { get; set; }
     public UserModel User { get; set; }
+    public List<InterviewTimeModel> Times { get; set; }
 }
