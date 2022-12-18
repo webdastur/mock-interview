@@ -35,11 +35,16 @@ class APIService {
       Uri.parse(
         "${baseUrl}Tokens",
       ),
-      body: {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: jsonEncode({
         "login": login,
         "password": password,
-      },
+      }),
     );
+
+    print(response.body);
 
     return jsonDecode(response.body);
   }
