@@ -10,6 +10,8 @@ import 'package:mock_interview/core/routes/module_init_guard.dart';
 import 'package:mock_interview/core/services/api_service.dart';
 import 'package:mock_interview/core/utils/assets.gen.dart';
 import 'package:mock_interview/ui/pages/login/login_page.dart';
+import 'package:mock_interview/ui/pages/menu/menu_page.dart';
+import 'package:mock_interview/ui/pages/users/users_page.dart';
 
 class HomePageModule extends Module {
   @override
@@ -25,7 +27,7 @@ class HomePageModule extends Module {
 }
 
 class HomePage extends StatefulWidget {
-  static const String routeName = "/";
+  static const String routeName = "/home";
 
   HomePage({Key? key}) : super(key: key);
 
@@ -92,11 +94,10 @@ class _HomePageState extends State<HomePage> {
                       icon: const Icon(FluentIcons.responses_menu),
                       label: const Text("Menu"),
                       onPressed: () {
-                        Modular.to.pushNamed(LoginPage.routeName);
+                        Modular.to.navigate("/menu${UsersPage.routeName}");
                       },
                     ),
-                    if (state.isLoggedIn)
-                    const CommandBarSeparator(),
+                    if (state.isLoggedIn) const CommandBarSeparator(),
                     if (!state.isLoggedIn)
                       CommandBarButton(
                         icon: const Icon(FluentIcons.people_add),

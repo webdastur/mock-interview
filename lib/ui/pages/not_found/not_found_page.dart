@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mock_interview/core/utils/assets.gen.dart';
+import 'package:mock_interview/ui/pages/home/home_page.dart';
 
 class NotFoundPageModule extends Module {
   @override
@@ -55,7 +56,10 @@ class NotFoundPage extends StatelessWidget {
                           "Return to home",
                           style: typography.title,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Modular.to.pushNamedAndRemoveUntil(
+                              HomePage.routeName, (p0) => false);
+                        },
                       ),
                     ],
                   ),

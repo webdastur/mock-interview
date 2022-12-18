@@ -4,12 +4,13 @@ import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mock_interview/core/bloc/loader/loader_cubit.dart';
-import 'package:mock_interview/core/bloc/user/user_cubit.dart';
+import 'package:mock_interview/core/bloc/navigation/navigation_cubit.dart';
 import 'package:mock_interview/core/services/api_service.dart';
 import 'package:mock_interview/core/services/hive_service.dart';
 import 'package:mock_interview/theme.dart';
 import 'package:mock_interview/ui/pages/home/home_page.dart';
 import 'package:mock_interview/ui/pages/login/login_page.dart';
+import 'package:mock_interview/ui/pages/menu/menu_page.dart';
 import 'package:mock_interview/ui/pages/not_found/not_found_page.dart';
 import 'package:provider/provider.dart' as p;
 import 'package:responsive_framework/responsive_framework.dart';
@@ -111,6 +112,7 @@ class AppModule extends Module {
         // Bind.lazySingleton<PaymentService>((i) => PaymentService()),
         // Bind.lazySingleton<TariffService>((i) => TariffService()),
         // Bind.lazySingleton<NewsService>((i) => NewsService()),
+        Bind.singleton<NavigationCubit>((i) => NavigationCubit()),
         Bind<LoaderCubit>(
           (i) => LoaderCubit(),
           onDispose: (v) => v.close(),
@@ -122,7 +124,7 @@ class AppModule extends Module {
         ModuleRoute('/', module: NotFoundPageModule()),
         ModuleRoute('/', module: HomePageModule()),
         ModuleRoute('/', module: LoginPageModule()),
-        // ModuleRoute('/', module: ChangePhoneNumberModule()),
+        ModuleRoute('/', module: MenuPageModule()),
         // ModuleRoute('/', module: EditProfilePageModule()),
         // ModuleRoute('/', module: ExclusivePageModule()),
         // ModuleRoute('/', module: FavouritesPageModule()),
